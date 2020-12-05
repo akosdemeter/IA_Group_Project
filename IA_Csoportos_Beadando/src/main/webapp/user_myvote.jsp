@@ -1,9 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- 
-    Document   : main
-    Created on : 2020.11.21., 19:08:04
-    Author     : Ákos
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
@@ -11,16 +6,24 @@
     response.setCharacterEncoding("UTF-8");
 %>
 
-<% if(session.getAttribute("username")!=null){ %>
+<% if((session.getAttribute("userid")!=null)&&(session.getAttribute("usertype")=="user")){ %>
     <!DOCTYPE html>
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Kezdőlap</title>
+            <title>Saját szavazások</title>
         </head>
         <body>
-            Felhasználó: <%= session.getAttribute("username") %><br>
+            <h1>Saját szavazások (user)</h1>
+            Felhasználó: <%= session.getAttribute("userid") %><br>
             Fiók típusa: <%= session.getAttribute("usertype") %><br>
+            
+            <!--Megírni a  funkciót, hogy új szavazást lehessen létrehozni,
+            illetve az eredményt megtekinteni,
+            és az adott szavazást törölni-->
+            
+            <br><a href="user_main.jsp">Vissza a kezdőlapra!</a><br>
+            
             <form action="check.jsp" method="POST">
                 <br><hr><br>
             <input type="submit" name="logout" value="Kijelentkezés">

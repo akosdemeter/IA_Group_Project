@@ -12,6 +12,10 @@
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
 %>
+<%!
+    String userid;
+    String adminid;
+%>
 <c:choose>
     <c:when test="${!empty param.login}">
         <c:choose>
@@ -22,15 +26,19 @@
             </c:when>
             <c:otherwise>
                 <sql:query var="lekerdezes" dataSource="${intalk}">
-                    SELECT * FROM USERS WHERE username = '${param.username}' and password = '${param.password}'
+                    SELECT id FROM USERS WHERE username = '${param.username}' and password = '${param.password}'
                 </sql:query>
                     <c:choose>
                         <c:when test="${lekerdezes.rowCount ne 0}">
+                            <c:forEach var = "row" items = "${lekerdezes.rows}">
+                                <c:set var = "id" value = "${row.id}"/>
+                                <%userid = (String)pageContext.getAttribute("id").toString();%>
+                            </c:forEach>
                             <% 
-                                session.setAttribute("username", request.getParameter("username"));
+                                session.setAttribute("userid", userid);
                                 session.setAttribute("usertype", "user");
                             %>
-                            <jsp:forward page="main.jsp"/>
+                            <jsp:forward page="user_main.jsp"/>
                         </c:when>
                         <c:otherwise>
                             <jsp:forward page="login.jsp">
@@ -50,15 +58,19 @@
             </c:when>
             <c:otherwise>
                 <sql:query var="lekerdezes2" dataSource="${intalk}">
-                    SELECT * FROM ADMIN WHERE username = '${param.username}' and password = '${param.password}'
+                    SELECT id FROM ADMIN WHERE username = '${param.username}' and password = '${param.password}'
                 </sql:query>
                     <c:choose>
                         <c:when test="${lekerdezes2.rowCount ne 0}">
+                            <c:forEach var = "row2" items = "${lekerdezes2.rows}">
+                                <c:set var = "id2" value = "${row2.id}"/>
+                                <%adminid = (String)pageContext.getAttribute("id2").toString();%>
+                            </c:forEach>
                             <% 
-                                session.setAttribute("username", request.getParameter("username"));
+                                session.setAttribute("adminid", adminid);
                                 session.setAttribute("usertype", "admin");
                             %>
-                            <jsp:forward page="main.jsp"/>
+                            <jsp:forward page="admin_main.jsp"/>
                         </c:when>
                         <c:otherwise>
                             <jsp:forward page="adminlogin.jsp">
