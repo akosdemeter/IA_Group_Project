@@ -142,6 +142,24 @@
         <% session.invalidate(); %>
         <jsp:forward page="login.jsp"/>
     </c:when>
+    <c:when test="${!empty param.createvote}">
+        <c:choose>
+            <c:when test="${(empty param.title) || (empty param.question || ((empty param.answer1) && (empty param.answer2) && (empty param.answer3) && (empty param.answer4)))}">
+                <jsp:forward page="user_myvote.jsp">
+                    <jsp:param name="errorMsg" value="A cím, a leírás és legalább 1 válaszlehetőség megadása kötelező!"/>
+                </jsp:forward>
+            </c:when>
+            <c:otherwise>
+                <sql:update var="beszurastema" dataSource="${intalk}">
+                    INSERT INTO INTALK.TOPICS (TITLE, QUESTION, ANSWER1, ANSWER2, ANSWER3, ANSWER4, USERID, ALLOWED, ADMIN)
+                    VALUES(${param.title}, ${param.question}, ${param.answer1}, ${param.answer2}, ${param.answer3}, ${param.answer4}, <%= session.getAttribute("userid")%>, FALSE, null)
+                </sql:update>
+                <jsp:forward page="user_myvote.jsp">
+                    <jsp:param name="errorMsg" value="A szavazás továbbítva lett jóváhagyásra."/>
+                </jsp:forward>
+            </c:otherwise>
+        </c:choose>
+    </c:when>
     <c:otherwise>
         <jsp:forward page="login.jsp">
             <jsp:param name="errorMsg" value="Kérem jelentkezzen be!"/>
