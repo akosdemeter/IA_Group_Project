@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
     Document   : login
     Created on : 2020.11.21., 19:05:11
@@ -10,6 +11,14 @@
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
 %>
+<sql:setDataSource 
+    var="intalk"
+    driver="org.apache.derby.jdbc.ClientDriver"
+    url="jdbc:derby://localhost:1527/IntAlkDB"
+    scope="session"
+    user="intalk"
+    password="123456"
+/>
 <!DOCTYPE html>
 <html>
     <head>
