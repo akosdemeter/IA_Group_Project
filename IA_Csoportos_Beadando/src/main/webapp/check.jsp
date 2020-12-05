@@ -15,6 +15,7 @@
 <%!
     String userid;
     String adminid;
+    String answerselected;
 %>
 <c:choose>
     <c:when test="${!empty param.login}">
@@ -152,13 +153,27 @@
             <c:otherwise>
                 <sql:update var="beszurastema" dataSource="${intalk}">
                     INSERT INTO INTALK.TOPICS (TITLE, QUESTION, ANSWER1, ANSWER2, ANSWER3, ANSWER4, USERID, ALLOWED, ADMIN)
-                    VALUES(${param.title}, ${param.question}, ${param.answer1}, ${param.answer2}, ${param.answer3}, ${param.answer4}, <%= session.getAttribute("userid")%>, FALSE, null)
+                    VALUES('${param.title}', '${param.question}', '${param.answer1}', '${param.answer2}', '${param.answer3}', '${param.answer4}', <%= session.getAttribute("userid")%>, FALSE, null)
                 </sql:update>
                 <jsp:forward page="user_myvote.jsp">
                     <jsp:param name="errorMsg" value="A szavazás továbbítva lett jóváhagyásra."/>
                 </jsp:forward>
             </c:otherwise>
         </c:choose>
+    </c:when>
+    <c:when test="${!empty param.sendvote}">
+            <%
+                String topicid = request.getParameter("topicid");
+                answerselected = request.getParameter(topicid);
+                if (answerselected!=null && !answerselected.isEmpty()) {%>
+                   <sql:update var="beszurasszavazat" dataSource="${intalk}">
+                        INSERT INTO INTALK.VOTES (TOPIC, USERID, SELECTEDANSWER)
+                        VALUES(${param.topicid}, <%= session.getAttribute("userid")%>, <%=answerselected%>)
+                    </sql:update>     
+                <%}%>
+                <jsp:forward page="user_othervote.jsp">
+                    <jsp:param name="errorMsg" value="A szavazat sikeresen leadásra került."/>
+                </jsp:forward>
     </c:when>
     <c:otherwise>
         <jsp:forward page="login.jsp">

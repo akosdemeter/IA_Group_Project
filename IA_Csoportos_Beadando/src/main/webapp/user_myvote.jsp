@@ -55,22 +55,23 @@
                        <th>4. válaszlehetőség</th>
                        <th>4. válaszlehetőségre adott válaszok száma</th>
                     </tr>
-                    <c:forEach var = "row" items = "${lekerdezes7.rows}">
+                    <c:forEach var = "row6" items = "${lekerdezes7.rows}">
                        <tr>
-                          <td> <c:out value = "${row.title}"/></td>
-                          <td> <c:out value = "${row.question}"/></td>
-                          <td> <c:out value = "${row.answer1}"/></td>
-                          <td> <c:out value = "${row.a1_votes}"/></td>
-                          <td> <c:out value = "${row.answer2}"/></td>
-                          <td> <c:out value = "${row.a2_votes}"/></td>
-                          <td> <c:out value = "${row.answer3}"/></td>
-                          <td> <c:out value = "${row.a3_votes}"/></td>
-                          <td> <c:out value = "${row.answer4}"/></td>
-                          <td> <c:out value = "${row.a4_votes}"/></td>
+                          <td> <c:out value = "${row6.title}"/></td>
+                          <td> <c:out value = "${row6.question}"/></td>
+                          <td> <c:out value = "${row6.answer1}"/></td>
+                          <td> <c:out value = "${row6.a1_votes}"/></td>
+                          <td> <c:out value = "${row6.answer2}"/></td>
+                          <td> <c:out value = "${row6.a2_votes}"/></td>
+                          <td> <c:out value = "${row6.answer3}"/></td>
+                          <td> <c:out value = "${row6.a3_votes}"/></td>
+                          <td> <c:out value = "${row6.answer4}"/></td>
+                          <td> <c:out value = "${row6.a4_votes}"/></td>
                        </tr>
                     </c:forEach>
                 </table>
                 <!--A törlés fukció még nincs benne-->
+                <hr>
                 <br><a href="user_main.jsp">Vissza a kezdőlapra!</a><br>
                 <br><hr><br>
                 <input type="submit" name="logout" value="Kijelentkezés">
