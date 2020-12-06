@@ -80,6 +80,12 @@
                         </sql:update>
                         <jsp:forward page="user_myvote.jsp" />
                     </c:when>
+                    <c:when test="${not empty param.utvalasztosajat}">
+                        <jsp:forward page="user_myvote.jsp" />
+                    </c:when>
+                    <c:when test="${not empty param.utvalasztomas}">
+                        <jsp:forward page="user_othervote.jsp" />
+                    </c:when>
         </c:choose>
     </body>
 </html>

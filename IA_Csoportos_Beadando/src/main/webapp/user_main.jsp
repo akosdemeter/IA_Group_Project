@@ -18,9 +18,12 @@
             <h1>Kezdőlap (user)</h1>
             
             <br>
-            <form action="user_myvote.jsp" method="POST"><input type="submit" value="Saját szavazások" id="utvalaszto">
+            <form action="check2.jsp" method="POST">
+                <input type="submit" value="Saját szavazások" name="utvalasztosajat">
             </form><br>
-            <br><form action="user_othervote.jsp" method="POST"><input type="submit" value="Mások szavazásai" id="utvalaszto"></form><br>
+            <br><form action="check2.jsp" method="POST">
+                <input type="submit" value="Mások szavazásai" name="utvalasztomas">
+            </form><br>
             
             <form action="check.jsp" method="POST">
                 <br><hr><br>
