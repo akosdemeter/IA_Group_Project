@@ -29,10 +29,14 @@
                 <sql:update var="jovahagyott" dataSource="${intalk}">
                     UPDATE INTALK.TOPICS SET t.ALLOWED= 'true' t.ADMIN = '<%=session.getAttribute("adminid") %>' WHERE t.ID='${param.jovahagyid}'
                 </sql:update>
+                <jsp:forward page="admin_main.jsp"/>
             </c:when>
             <%-- Az elutasítás gombra kattintva átírja az adatbázisban az allowed mezőt false-ra--%>
             <c:when test="${not empty param.elutasit}"> 
+                <sql:update var="elutasitott" dataSource="${intalk}">
                 UPDATE INTALK.TOPICS SET t.ALLOWED = 'false' t.ADMIN = '<%=session.getAttribute("adminid")%>' WHERE t.ID ='${param.elutasitid}'
+                </sql:update>
+                <jsp:forward page="admin_main.jsp"></jsp:forward>
             </c:when>
         </c:choose>
         <%-- A szavazás létrehozása --%>
@@ -55,6 +59,7 @@
                     </c:otherwise>
                 </c:choose>
             </c:when>
+                    <%--Szavazat leadása --%>
             <c:when test="${!empty param.sendvote}">
                 <%
                 String topicid = request.getParameter("topicid");
@@ -69,6 +74,12 @@
                     <jsp:param name="errorMsg" value="A szavazat sikeresen leadásra került."/>
                 </jsp:forward>
             </c:when>
+                    <c:when test="${not empty param.deletevote}">
+                        <sql:update>
+                            DELETE INTALK.TOPICS WHERE T.ID = '${param.topicid}'
+                        </sql:update>
+                        <jsp:forward page="user_myvote" />
+                    </c:when>
         </c:choose>
     </body>
 </html>
