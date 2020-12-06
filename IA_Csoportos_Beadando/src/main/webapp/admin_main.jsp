@@ -56,7 +56,7 @@
 
             <form action="check.jsp" method="POST" name="kijelentkezo">
                 <br><hr><br>
-            <input type="submit" name="logout" value="Kijelentkezés">
+            <input type="submit" name="logout" value="Kijelentkezés" id="log">
             </form>
         </body>
     </html>

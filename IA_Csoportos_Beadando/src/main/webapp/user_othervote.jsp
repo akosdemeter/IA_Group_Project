@@ -85,7 +85,7 @@
             <br><a href="user_main.jsp">Vissza a kezdőlapra!</a><br>
             <form action="check.jsp" method="POST" name="logout">
                 <br><hr><br>
-            <input type="submit" name="logout" value="Kijelentkezés">
+            <input type="submit" name="logout" value="Kijelentkezés" id="log">
             </form>
             <c:if test="${!empty param.errorMsg}">
                 <hr>
