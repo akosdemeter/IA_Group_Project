@@ -19,7 +19,7 @@
             Felhasználó: <%= session.getAttribute("adminid") %><br>
             Fiók típusa: <%= session.getAttribute("usertype") %><br>
             <sql:query var="szavazasjovahagyas" dataSource="${intalk}">
-                SELECT t.ID,t.TITLE,t.QUESTION,t.ANSWER1,t.ANSWER2,t.ANSWER3,t.ANSWER4 FROM TOPICS WHERE t.ADMIN = NULL
+                SELECT t.ID,t.TITLE,t.QUESTION,t.ANSWER1,t.ANSWER2,t.ANSWER3,t.ANSWER4 FROM TOPICS t WHERE t.ADMIN is NULL
             </sql:query>
             <h2>Jóváhagyásra váró szavazások:</h2>
             <table width ="100%" border="1">
@@ -30,8 +30,9 @@
                     <th>2. válaszlehetőség</th>
                     <th>3. válaszlehetőség</th>
                     <th>4. válaszlehetőség</th>
+                    <th>Opciók</th>
                 </tr>
-                <c:forEach var="szavazassorok" items="${szavazasjovahagyas}">
+                <c:forEach var="szavazassorok" items="${szavazasjovahagyas.rows}">
                     <tr>
                     <td><c:out value="${szavazassorok.title}"/></td>
                     <td><c:out value="${szavazassorok.question}"/></td>
