@@ -76,9 +76,9 @@
             </c:when>
                     <c:when test="${not empty param.deletevote}">
                         <sql:update var="torles" dataSource="${intalk}">
-                            DELETE FROM INTALK.TOPICS WHERE TOPICS.ID = ${param.topicid}
+                            DELETE FROM TOPICS WHERE TOPICS.ID = ${param.topicid}
                         </sql:update>
-                        <jsp:forward page="user_myvote" />
+                        <jsp:forward page="user_myvote.jsp" />
                     </c:when>
         </c:choose>
     </body>

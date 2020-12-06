@@ -32,7 +32,7 @@
                 hogy több választós is lehet a szavazás, 
                 illetve lehet több lehetőségnek is hely -->
                 <sql:query  var="lekerdezes7" dataSource="${intalk}">
-                    SELECT t.TITLE, t.QUESTION, 
+                    SELECT t.TITLE, t.QUESTION, t.ID,
                     t.ANSWER1, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 1) as A1_VOTES, 
                     t.ANSWER2, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 2) as A2_VOTES,
                     t.ANSWER3, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 3) as A3_VOTES,
@@ -76,7 +76,7 @@
                 <hr>
                 <h2>Jóváhagyásra váró szavazások</h2>
                 <sql:query  var="lekerdezes11" dataSource="${intalk}">
-                    SELECT t.TITLE, t.QUESTION, t.ANSWER1, t.ANSWER2, t.ANSWER3, t.ANSWER4
+                    SELECT t.ID, t.TITLE, t.QUESTION, t.ANSWER1, t.ANSWER2, t.ANSWER3, t.ANSWER4
                      FROM TOPICS t WHERE t.ADMIN is null and t.ALLOWED = false and t.USERID = <%= session.getAttribute("userid") %>
                 </sql:query>
                 <table border = "1" width = "100%">
@@ -107,7 +107,7 @@
             <hr>
                 <h2>Elutasított szavazások</h2>
                 <sql:query  var="lekerdezes10" dataSource="${intalk}">
-                    SELECT t.TITLE, t.QUESTION, t.ANSWER1, t.ANSWER2, t.ANSWER3, t.ANSWER4
+                    SELECT t.ID, t.TITLE, t.QUESTION, t.ANSWER1, t.ANSWER2, t.ANSWER3, t.ANSWER4
                      FROM TOPICS t WHERE t.ADMIN is not null and t.ALLOWED = false and t.USERID = <%= session.getAttribute("userid") %>
                 </sql:query>
                 <table border = "1" width = "100%">
