@@ -15,12 +15,14 @@
     </head>
     <body>
         <h1>Adminisztrátori bejelentkezés</h1>
+        <div class="login">
         <form action="check.jsp" method="POST" name="login">
-            Felhasználó név: <input type="text" name="username" value="" /><br>
-            Jelszó: <input type="password" name="password" value="" /><br>
-            <input type="submit" value="Bejelentkezés" name="adminlogin" /><br><br>
-            Visszatérek a <a href="login.jsp">Bejelentkezési</a> oldalra.<br>
+            <label> <b> Felhasználó név:</b></label><br><input type="text" name="username" value="" id="user" placeholder="Felhasználó név"/><br><br>
+            <label> <b> Jelszó:</b></label><br><input type="password" name="password" value="" id="pass" placeholder="Jelszó"/><br><br>
+            <input type="submit" value="Bejelentkezés" name="adminlogin" id="log" /><br><br>
+            <label> Visszatérek a <a href="login.jsp">Bejelentkezési</a> oldalra.</label> <br>
         </form>
+        </div>
         <c:if test="${!empty param.errorMsg}">
             <hr>
             ${param.errorMsg}

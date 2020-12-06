@@ -8,3 +8,54 @@ and open the template in the editor.
     Author     : leron
 */
 
+body {
+    background-color: #d0e8f2;
+    margin: 0;
+    padding: 0;    
+} 
+.login {
+    width: 420px;
+    overflow: hidden;
+    margin: auto;
+    padding: 80px;
+    background-color: #456268;
+}
+h2 {
+    text-align: center;
+    padding: 20px;
+    color: #79a3b1;
+}
+
+label {
+    font-size: 17px;
+    color: #79a3b1;
+}
+
+#user {
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    padding-left: 6px;
+}
+#pass {
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    padding-left: 8px;
+}
+
+#log {
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 17px;
+    padding-left: 7px;
+    color: #fcf8ec;
+}
+h1 {
+    text-align: center;
+    padding: 20px;
+    color: #456268;
+}
