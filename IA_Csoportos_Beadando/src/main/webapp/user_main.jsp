@@ -17,12 +17,14 @@
         <body>
             <h1>Kezdőlap (user)</h1>
             
-            <br><a href="user_myvote.jsp">Saját szavazások</a><br>
-            <br><a href="user_othervote.jsp">Mások szavazásai</a><br>
+            <br>
+            <form action="user_myvote.jsp" method="POST"><input type="submit" value="Saját szavazások" id="utvalaszto">
+            </form><br>
+            <br><form action="user_othervote.jsp" method="POST"><input type="submit" value="Mások szavazásai" id="utvalaszto"></form><br>
             
             <form action="check.jsp" method="POST">
                 <br><hr><br>
-            <input type="submit" name="logout" value="Kijelentkezés">
+            <input type="submit" name="logout" value="Kijelentkezés" id="log">
             </form>
         </body>
     </html>

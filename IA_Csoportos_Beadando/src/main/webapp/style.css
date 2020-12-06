@@ -99,6 +99,17 @@ label {
     margin-top: 3px;
     margin-bottom: 8px;
 }
+#utvalaszto{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 17px;
+    padding: auto;
+    color: #79a3b1;
+    margin: auto;
+    text-align: center;
+    display: grid;
+}
 h1 {
     text-align: center;
     padding: 20px;
