@@ -19,7 +19,7 @@
             Felhasználó: <%= session.getAttribute("adminid") %><br>
             Fiók típusa: <%= session.getAttribute("usertype") %><br>
             <sql:query var="szavazasjovahagyas" dataSource="${intalk}">
-                SELECT t.TITLE,t.QUESTION,t.ANSWER1,t.ANSWER2,t.ANSWER3,t.ANSWER4 FROM TOPICS WHERE t.ALLOWED = FALSE
+                SELECT t.ID,t.TITLE,t.QUESTION,t.ANSWER1,t.ANSWER2,t.ANSWER3,t.ANSWER4 FROM TOPICS WHERE t.ADMIN = NULL
             </sql:query>
             <h2>Jóváhagyásra váró szavazások:</h2>
             <table width ="100%" border="1">
@@ -39,10 +39,20 @@
                     <td><c:out value="${szavazassorok.answer2}"/></td>
                     <td><c:out value="${szavazassorok.answer3}"/></td>
                     <td><c:out value="${szavazassorok.answer4}"/></td>
+                    <td>            
+                        <form action="check2.jsp" method="POST" name="jovahagyo">  
+                            <input type="hidden" name="jovahagyid" value="${szavazassorok.id}">
+                            <input type="submit" name="jovahagy" value="Jóváhagyás"> 
+                        </form>
+                        <form action="check2.jsp" method="POST" name="elutasit" >
+                            <input type="hidden" name="elutasitid" value="${szavazassorok.id}">
+                        <input type="submit" name="elutasit" value="elutasítás">
+                        </form></td>
                     </tr>
                 </c:forEach>
-            </table>         
-            <form action="check.jsp" method="POST">
+            </table>
+
+            <form action="check.jsp" method="POST" name="kijelentkezo">
                 <br><hr><br>
             <input type="submit" name="logout" value="Kijelentkezés">
             </form>
