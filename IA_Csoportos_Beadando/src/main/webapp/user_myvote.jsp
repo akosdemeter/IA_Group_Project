@@ -17,7 +17,7 @@
         <body>
             <h1>Saját szavazások (user)</h1>
             <hr><br>
-            <form action="check.jsp" method="POST">
+            <form action="check2.jsp" method="POST" name="createvote">
                 <h2>Új szavazás</h2>
                 Cím: <input type="text" name="title" value="" /><br>
                 A kérdés részletes leírása: <input type="text" name="question" value="" /><br>
@@ -52,8 +52,11 @@
                        <th>3. válaszlehetőségre adott válaszok száma</th>
                        <th>4. válaszlehetőség</th>
                        <th>4. válaszlehetőségre adott válaszok száma</th>
+                       <th>Szavazás törlése</th>
                     </tr>
                     <c:forEach var = "row6" items = "${lekerdezes7.rows}">
+                       <form action="check2.jsp" method="POST" name="${row6.ID}+form">
+                       <input type="hidden" name="topicid" value="${row6.ID}" />
                        <tr>
                           <td> <c:out value = "${row6.title}"/></td>
                           <td> <c:out value = "${row6.question}"/></td>
@@ -65,7 +68,9 @@
                           <td> <c:out value = "${row6.a3_votes}"/></td>
                           <td> <c:out value = "${row6.answer4}"/></td>
                           <td> <c:out value = "${row6.a4_votes}"/></td>
+                          <td><input type="submit" value="Törlés" name="deletevote" /></td>
                        </tr>
+                       </form>
                     </c:forEach>
                 </table>
                 <hr>
@@ -82,19 +87,25 @@
                        <th>2. válaszlehetőség</th>
                        <th>3. válaszlehetőség</th>
                        <th>4. válaszlehetőség</th>
+                       <th>Szavazás törlése</th>
                     </tr>
-                    <c:forEach var = "row6" items = "${lekerdezes10.rows}">
+                    <c:forEach var = "row10" items = "${lekerdezes10.rows}">
+                       <form action="check2.jsp" method="POST" name="${row10.ID}+form">
+                       <input type="hidden" name="topicid" value="${row6.ID}" />
                        <tr>
-                          <td> <c:out value = "${row6.title}"/></td>
-                          <td> <c:out value = "${row6.question}"/></td>
-                          <td> <c:out value = "${row6.answer1}"/></td>
-                          <td> <c:out value = "${row6.answer2}"/></td>
-                          <td> <c:out value = "${row6.answer3}"/></td>
-                          <td> <c:out value = "${row6.answer4}"/></td>
+                          <td> <c:out value = "${row10.title}"/></td>
+                          <td> <c:out value = "${row10.question}"/></td>
+                          <td> <c:out value = "${row10.answer1}"/></td>
+                          <td> <c:out value = "${row10.answer2}"/></td>
+                          <td> <c:out value = "${row10.answer3}"/></td>
+                          <td> <c:out value = "${row10.answer4}"/></td>
+                          <td><input type="submit" value="Törlés" name="deletevote" /></td>
                        </tr>
+                       </form>
                     </c:forEach>
                 </table>
-            <form action="check.jsp" method="POST">
+            <hr>
+            <form action="check.jsp" method="POST" name="logout">
                 <br><a href="user_main.jsp">Vissza a kezdőlapra!</a><br>
                 <br><hr><br>
                 <input type="submit" name="logout" value="Kijelentkezés">

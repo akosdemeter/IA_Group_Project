@@ -23,7 +23,7 @@
                 (SELECT vo.TOPIC FROM VOTES vo WHERE vo.USERID = <%= session.getAttribute("userid") %>)
             </sql:query>
             <c:forEach var = "row8" items = "${lekerdezes8.rows}">
-                <form action="check.jsp" method="POST" name="${row8.ID}+form">
+                <form action="check2.jsp" method="POST" name="${row8.ID}+form">
                 <h3><c:out value = "${row8.title}"/></h3>
                 <c:out value = "${row8.question}"/><br>
                 <input type="radio" name="${row8.ID}" value="1" /><c:out value = "${row8.answer1}"/>
