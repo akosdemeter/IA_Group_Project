@@ -74,10 +74,41 @@
                     </c:forEach>
                 </table>
                 <hr>
+                <h2>Jóváhagyásra váró szavazások</h2>
+                <sql:query  var="lekerdezes11" dataSource="${intalk}">
+                    SELECT t.TITLE, t.QUESTION, t.ANSWER1, t.ANSWER2, t.ANSWER3, t.ANSWER4
+                     FROM TOPICS t WHERE t.ADMIN is null and t.ALLOWED = false and t.USERID = <%= session.getAttribute("userid") %>
+                </sql:query>
+                <table border = "1" width = "100%">
+                    <tr>
+                       <th>Cím</th>
+                       <th>A kérdés részletes leírása</th>
+                       <th>1. válaszlehetőség</th>
+                       <th>2. válaszlehetőség</th>
+                       <th>3. válaszlehetőség</th>
+                       <th>4. válaszlehetőség</th>
+                       <th>Szavazás törlése</th>
+                    </tr>
+                    <c:forEach var = "row11" items = "${lekerdezes11.rows}">
+                       <form action="check2.jsp" method="POST" name="${row11.ID}+form">
+                       <input type="hidden" name="topicid" value="${row11.ID}" />
+                       <tr>
+                          <td> <c:out value = "${row11.title}"/></td>
+                          <td> <c:out value = "${row11.question}"/></td>
+                          <td> <c:out value = "${row11.answer1}"/></td>
+                          <td> <c:out value = "${row11.answer2}"/></td>
+                          <td> <c:out value = "${row11.answer3}"/></td>
+                          <td> <c:out value = "${row11.answer4}"/></td>
+                          <td><input type="submit" value="Törlés" name="deletevote" /></td>
+                       </tr>
+                       </form>
+                    </c:forEach>
+                </table>
+            <hr>
                 <h2>Elutasított szavazások</h2>
                 <sql:query  var="lekerdezes10" dataSource="${intalk}">
                     SELECT t.TITLE, t.QUESTION, t.ANSWER1, t.ANSWER2, t.ANSWER3, t.ANSWER4
-                     FROM TOPICS t WHERE t.ALLOWED = false and t.USERID = <%= session.getAttribute("userid") %>
+                     FROM TOPICS t WHERE t.ADMIN is not null and t.ALLOWED = false and t.USERID = <%= session.getAttribute("userid") %>
                 </sql:query>
                 <table border = "1" width = "100%">
                     <tr>
@@ -91,7 +122,7 @@
                     </tr>
                     <c:forEach var = "row10" items = "${lekerdezes10.rows}">
                        <form action="check2.jsp" method="POST" name="${row10.ID}+form">
-                       <input type="hidden" name="topicid" value="${row6.ID}" />
+                       <input type="hidden" name="topicid" value="${row10.ID}" />
                        <tr>
                           <td> <c:out value = "${row10.title}"/></td>
                           <td> <c:out value = "${row10.question}"/></td>
