@@ -20,14 +20,16 @@
     </head>
     <body>
         <h1>Regisztráció</h1>
+        <div class="login">
         <form action="check.jsp" method="POST">
-            E-mail cím: <input type="text" name="email" value="" /><br>
-            Felhasználó név: <input type="text" name="username" value="" /><br>
-            Jelszó: <input type="password" name="password" value="" /><br>
-            Jelszó megerősítése: <input type="password" name="confirmpassword" value="" /><br>
-            <input type="submit" value="Regisztráció" name="register" /><br><br>
-            Visszatérek a <a href="login.jsp">Bejelentkezési</a> oldalra.<br>
+            <label><b>E-mail cím:</b></label><br> <input type="text" name="email" value="" id="mail" placeholder="E-mail cím"/><br><br>
+            <label><b> Felhasználó név:</b></label> <input type="text" name="username" value="" id="user" placeholder="Felhasználó név"/><br><br>
+            <label><b>Jelszó:</b> </label><br> <input type="password" name="password" value="" id="pass" placeholder="Jelszó"/><br><br>
+            <label><b>Jelszó megerősítése:</b></label> <input type="password" name="confirmpassword" value="" id="pass" placeholder="Jelszó megerősítése"/><br><br>
+            <input type="submit" value="Regisztráció" name="register" id="log"/><br><br>
+            <label>Visszatérek a <a href="login.jsp">Bejelentkezési</a> oldalra.</label><br>
         </form>
+        </div>
         <c:if test="${!empty param.errorMsg}">
             <hr>
             ${param.errorMsg}
