@@ -27,14 +27,14 @@
             <%--Jóváhagyás gombra kattintva átírja az adatbázisban az allowed mezőt true-ra --%>
             <c:when test="${not empty param.jovahagy}">
                 <sql:update var="jovahagyott" dataSource="${intalk}">
-                    UPDATE INTALK.TOPICS SET t.ALLOWED= true t.ADMIN = <%=session.getAttribute("adminid") %> WHERE t.ID=${param.jovahagyid}
+                    UPDATE INTALK.TOPICS SET TOPICS.ALLOWED= true, TOPICS.ADMIN = <%=session.getAttribute("adminid") %> WHERE TOPICS.ID=${param.jovahagyid}
                 </sql:update>
                 <jsp:forward page="admin_main.jsp"/>
             </c:when>
             <%-- Az elutasítás gombra kattintva átírja az adatbázisban az allowed mezőt false-ra--%>
             <c:when test="${not empty param.elutasit}"> 
                 <sql:update var="elutasitott" dataSource="${intalk}">
-                UPDATE INTALK.TOPICS SET t.ALLOWED = false t.ADMIN = <%=session.getAttribute("adminid")%> WHERE t.ID =${param.elutasitid}
+                UPDATE INTALK.TOPICS SET TOPICS.ALLOWED = false, TOPICS.ADMIN = <%=session.getAttribute("adminid")%> WHERE TOPICS.ID =${param.elutasitid}
                 </sql:update>
                 <jsp:forward page="admin_main.jsp"></jsp:forward>
             </c:when>
