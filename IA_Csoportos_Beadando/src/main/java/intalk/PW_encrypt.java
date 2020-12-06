@@ -1,6 +1,6 @@
 package intalk;
 import java.security.MessageDigest;
-import javax.xml.bind.DatatypeConverter;
+import jakarta.xml.bind.DatatypeConverter;
 
 public class PW_encrypt {   
     private String pwhash = "Teszt";
