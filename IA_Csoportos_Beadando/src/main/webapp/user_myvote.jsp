@@ -16,10 +16,15 @@
         </head>
         <body>
             <h1>Saját szavazások (user)</h1>
-            Felhasználó: <%= session.getAttribute("userid") %><br>
-            Fiók típusa: <%= session.getAttribute("usertype") %><br>
             <hr><br>
-
+            <sql:query  var="lekerdezes7" dataSource="${intalk}">
+                SELECT t.TITLE, t.QUESTION, 
+                t.ANSWER1, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 1) as A1_VOTES, 
+                t.ANSWER2, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 2) as A2_VOTES,
+                t.ANSWER3, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 3) as A3_VOTES,
+                t.ANSWER4, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 4) as A4_VOTES
+                 FROM TOPICS t WHERE t.USERID = <%= session.getAttribute("userid") %>
+            </sql:query>
             <form action="check.jsp" method="POST">
                 <h2>Új szavazás</h2>
                 Cím: <input type="text" name="title" value="" /><br>
@@ -33,14 +38,7 @@
                 <!--ha lesz rá idő plusz funkció,
                 hogy több választós is lehet a szavazás, 
                 illetve lehet több lehetőségnek is hely -->
-                <sql:query  var="lekerdezes7" dataSource="${intalk}">
-                    SELECT t.TITLE, t.QUESTION, 
-                    t.ANSWER1, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 1) as A1_VOTES, 
-                    t.ANSWER2, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 2) as A2_VOTES,
-                    t.ANSWER3, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 3) as A3_VOTES,
-                    t.ANSWER4, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 4) as A4_VOTES
-                     FROM TOPICS t WHERE t.USERID = <%= session.getAttribute("userid") %>
-                </sql:query>
+                
                 <h2>Korábbi szavazások eredményei</h2>
                 <table border = "1" width = "100%">
                     <tr>

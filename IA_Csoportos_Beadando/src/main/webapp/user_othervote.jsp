@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
@@ -15,27 +16,24 @@
         </head>
         <body>
             <h1>Mások szavazásai (user)</h1>
-            Felhasználó: <%= session.getAttribute("userid") %><br>
-            Fiók típusa: <%= session.getAttribute("usertype") %><br>
             <h2>Új szavazások</h2>
             <sql:query  var="lekerdezes8" dataSource="${intalk}">
-                SELECT t.ID, t.TITLE, t.QUESTION, t.ANSWER1, t.ANSWER2, t.ANSWER3, t.ANSWER4
-                FROM TOPICS t WHERE t.ID not in 
+                SELECT DISTINCT t.ID, t.TITLE, t.QUESTION, t.ANSWER1, t.ANSWER2, t.ANSWER3, t.ANSWER4
+                FROM TOPICS t WHERE t.USERID not in (<%= session.getAttribute("userid") %>) and t.ID not in 
                 (SELECT vo.TOPIC FROM VOTES vo WHERE vo.USERID = <%= session.getAttribute("userid") %>)
             </sql:query>
-            <c:forEach var = "row8" items = "${lekerdezes9.rows}">
+            <c:forEach var = "row8" items = "${lekerdezes8.rows}">
+                <form action="check.jsp" method="POST" name="${row8.ID}+form">
                 <h3><c:out value = "${row8.title}"/></h3>
                 <c:out value = "${row8.question}"/><br>
-                <input type="radio" name="${row8.ID}" value="1" /><c:out value = "${row8.answer1}"/><br>
-                <input type="radio" name="${row8.ID}" value="2" /><c:out value = "${row8.answer2}"/><br>
-                <input type="radio" name="${row8.ID}" value="3" /><c:out value = "${row8.answer3}"/><br>
-                <input type="radio" name="${row8.ID}" value="4" /><c:out value = "${row8.answer4}"/><br>
-                <input type="hidden" name="topicid" value="${row8.ID}" />
-                <br><input type="submit" value="Szavazás" name="sendvote" />
+                <input type="radio" name="${row8.ID}" value="1" /><c:out value = "${row8.answer1}"/>
+                <input type="radio" name="${row8.ID}" value="2" /><c:out value = "${row8.answer2}"/>
+                <input type="radio" name="${row8.ID}" value="3" /><c:out value = "${row8.answer3}"/>
+                <input type="radio" name="${row8.ID}" value="4" /><c:out value = "${row8.answer4}"/>
+                <br><input type="submit" value="Szavazás" name="${row8.ID}+sendvote" />
                 <hr>
+                </form>
             </c:forEach>
-            <hr><br>
-
             <h2>Szavazások eredményei (ahova már adott le szavazatot)</h2>
             <sql:query  var="lekerdezes9" dataSource="${intalk}">
                 SELECT t.TITLE, t.QUESTION, 
@@ -75,7 +73,7 @@
             </table>
             <hr>
             <br><a href="user_main.jsp">Vissza a kezdőlapra!</a><br>
-            <form action="check.jsp" method="POST">
+            <form action="check.jsp" method="POST" name="logout">
                 <br><hr><br>
             <input type="submit" name="logout" value="Kijelentkezés">
             </form>
