@@ -19,7 +19,7 @@
             <h2>Új szavazások</h2>
             <sql:query  var="lekerdezes8" dataSource="${intalk}">
                 SELECT DISTINCT t.ID, t.TITLE, t.QUESTION, t.ANSWER1, t.ANSWER2, t.ANSWER3, t.ANSWER4
-                FROM TOPICS t WHERE t.USERID not in (<%= session.getAttribute("userid") %>) and t.ID not in 
+                FROM TOPICS t WHERE t.ALLOWED = true and t.USERID not in (<%= session.getAttribute("userid") %>) and t.ID not in 
                 (SELECT vo.TOPIC FROM VOTES vo WHERE vo.USERID = <%= session.getAttribute("userid") %>)
             </sql:query>
             <c:forEach var = "row8" items = "${lekerdezes8.rows}">
@@ -30,7 +30,8 @@
                 <input type="radio" name="${row8.ID}" value="2" /><c:out value = "${row8.answer2}"/>
                 <input type="radio" name="${row8.ID}" value="3" /><c:out value = "${row8.answer3}"/>
                 <input type="radio" name="${row8.ID}" value="4" /><c:out value = "${row8.answer4}"/>
-                <br><input type="submit" value="Szavazás" name="${row8.ID}+sendvote" />
+                <input type="hidden" name="topicid" value="${row8.ID}" />
+                <br><input type="submit" value="Szavazás" name="sendvote" />
                 <hr>
                 </form>
             </c:forEach>

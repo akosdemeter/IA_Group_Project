@@ -17,14 +17,6 @@
         <body>
             <h1>Saját szavazások (user)</h1>
             <hr><br>
-            <sql:query  var="lekerdezes7" dataSource="${intalk}">
-                SELECT t.TITLE, t.QUESTION, 
-                t.ANSWER1, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 1) as A1_VOTES, 
-                t.ANSWER2, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 2) as A2_VOTES,
-                t.ANSWER3, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 3) as A3_VOTES,
-                t.ANSWER4, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 4) as A4_VOTES
-                 FROM TOPICS t WHERE t.USERID = <%= session.getAttribute("userid") %>
-            </sql:query>
             <form action="check.jsp" method="POST">
                 <h2>Új szavazás</h2>
                 Cím: <input type="text" name="title" value="" /><br>
@@ -35,11 +27,19 @@
                 4. válaszlehetőség: <input type="text" name="answer4" value="" /><br>
                 <input type="submit" value="Szavazás létrehozása" name="createvote" /><br>
                 <hr><br>
+            </form>
                 <!--ha lesz rá idő plusz funkció,
                 hogy több választós is lehet a szavazás, 
                 illetve lehet több lehetőségnek is hely -->
-                
-                <h2>Korábbi szavazások eredményei</h2>
+                <sql:query  var="lekerdezes7" dataSource="${intalk}">
+                    SELECT t.TITLE, t.QUESTION, 
+                    t.ANSWER1, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 1) as A1_VOTES, 
+                    t.ANSWER2, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 2) as A2_VOTES,
+                    t.ANSWER3, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 3) as A3_VOTES,
+                    t.ANSWER4, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 4) as A4_VOTES
+                     FROM TOPICS t WHERE t.ALLOWED = true and t.USERID = <%= session.getAttribute("userid") %>
+                </sql:query>
+                <h2>Korábbi engedélyezett szavazások eredményei</h2>
                 <table border = "1" width = "100%">
                     <tr>
                        <th>Cím</th>
@@ -68,8 +68,33 @@
                        </tr>
                     </c:forEach>
                 </table>
-                <!--A törlés fukció még nincs benne-->
                 <hr>
+                <h2>Elutasított szavazások</h2>
+                <sql:query  var="lekerdezes10" dataSource="${intalk}">
+                    SELECT t.TITLE, t.QUESTION, t.ANSWER1, t.ANSWER2, t.ANSWER3, t.ANSWER4
+                     FROM TOPICS t WHERE t.ALLOWED = false and t.USERID = <%= session.getAttribute("userid") %>
+                </sql:query>
+                <table border = "1" width = "100%">
+                    <tr>
+                       <th>Cím</th>
+                       <th>A kérdés részletes leírása</th>
+                       <th>1. válaszlehetőség</th>
+                       <th>2. válaszlehetőség</th>
+                       <th>3. válaszlehetőség</th>
+                       <th>4. válaszlehetőség</th>
+                    </tr>
+                    <c:forEach var = "row6" items = "${lekerdezes10.rows}">
+                       <tr>
+                          <td> <c:out value = "${row6.title}"/></td>
+                          <td> <c:out value = "${row6.question}"/></td>
+                          <td> <c:out value = "${row6.answer1}"/></td>
+                          <td> <c:out value = "${row6.answer2}"/></td>
+                          <td> <c:out value = "${row6.answer3}"/></td>
+                          <td> <c:out value = "${row6.answer4}"/></td>
+                       </tr>
+                    </c:forEach>
+                </table>
+            <form action="check.jsp" method="POST">
                 <br><a href="user_main.jsp">Vissza a kezdőlapra!</a><br>
                 <br><hr><br>
                 <input type="submit" name="logout" value="Kijelentkezés">
