@@ -9,12 +9,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Adminisztrátori bejelentkezés</title>
     </head>
     <body>
         <h1>Adminisztrátori bejelentkezés</h1>
-        <form action="check.jsp" method="POST">
+        <form action="check.jsp" method="POST" name="login">
             Felhasználó név: <input type="text" name="username" value="" /><br>
             Jelszó: <input type="password" name="password" value="" /><br>
             <input type="submit" value="Bejelentkezés" name="adminlogin" /><br><br>
