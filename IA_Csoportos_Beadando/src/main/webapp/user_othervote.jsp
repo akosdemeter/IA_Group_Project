@@ -26,10 +26,18 @@
                 <form action="check2.jsp" method="POST" name="${row8.ID}+form">
                 <h3><c:out value = "${row8.title}"/></h3>
                 <c:out value = "${row8.question}"/><br>
-                <input type="radio" name="${row8.ID}" value="1" /><c:out value = "${row8.answer1}"/>
+                <c:if test="${!empty row8.answer1}">
+                    <input type="radio" name="${row8.ID}" value="1" /><c:out value = "${row8.answer1}"/>
+                </c:if>
+                <c:if test="${!empty row8.answer2}">
                 <input type="radio" name="${row8.ID}" value="2" /><c:out value = "${row8.answer2}"/>
+                </c:if>
+                <c:if test="${!empty row8.answer3}">
                 <input type="radio" name="${row8.ID}" value="3" /><c:out value = "${row8.answer3}"/>
+                </c:if>
+                <c:if test="${!empty row8.answer4}">
                 <input type="radio" name="${row8.ID}" value="4" /><c:out value = "${row8.answer4}"/>
+                </c:if>
                 <input type="hidden" name="topicid" value="${row8.ID}" />
                 <br><input type="submit" value="Szavazás" name="sendvote" />
                 <hr>
