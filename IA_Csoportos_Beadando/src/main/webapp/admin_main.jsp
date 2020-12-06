@@ -22,8 +22,9 @@
             <sql:query var="szavazasjovahagyas" dataSource="${intalk}">
                 SELECT t.ID,t.TITLE,t.QUESTION,t.ANSWER1,t.ANSWER2,t.ANSWER3,t.ANSWER4 FROM TOPICS t WHERE t.ADMIN is NULL
             </sql:query>
-            <h2>Jóváhagyásra váró szavazások:</h2>
-            <table width ="100%" border="1">
+            <div class="table-vote">
+                <div class="header">Jóváhagyásra váró szavazások:</div>
+            <table>
                 <tr>
                     <th>Cím</th>
                     <th>A kérdés részletes leírása</th>
@@ -44,16 +45,16 @@
                     <td>            
                         <form action="check2.jsp" method="POST" name="jovahagyo">  
                             <input type="hidden" name="jovahagyid" value="${szavazassorok.id}">
-                            <input type="submit" name="jovahagy" value="Jóváhagyás"> 
-                        </form>
+                            <input type="submit" name="jovahagy" value="Jóváhagyás" id="adminbtn"> 
+                        </form>                            
                         <form action="check2.jsp" method="POST" name="elutasit" >
                             <input type="hidden" name="elutasitid" value="${szavazassorok.id}">
-                        <input type="submit" name="elutasit" value="elutasítás">
+                        <input type="submit" name="elutasit" value="Elutasítás" id="adminbtn">
                         </form></td>
                     </tr>
                 </c:forEach>
             </table>
-
+            </div>
             <form action="check.jsp" method="POST" name="kijelentkezo">
                 <br><hr><br>
             <input type="submit" name="logout" value="Kijelentkezés" id="log">

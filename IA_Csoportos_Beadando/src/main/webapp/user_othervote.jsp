@@ -44,7 +44,8 @@
                 <hr>
                 </form>
             </c:forEach>
-            <h2>Szavazások eredményei (ahova már adott le szavazatot)</h2>
+            <div class="table-vote">
+            <div class="header">Szavazások eredményei (ahova már adott le szavazatot)</div>
             <sql:query  var="lekerdezes9" dataSource="${intalk}">
                 SELECT t.TITLE, t.QUESTION, 
                 t.ANSWER1, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 1) as A1_VOTES, 
@@ -53,7 +54,7 @@
                 t.ANSWER4, (SELECT COUNT(*) FROM VOTES v WHERE v.TOPIC=t.ID and v.SELECTEDANSWER = 4) as A4_VOTES
                  FROM TOPICS t WHERE t.ID in (SELECT vo.TOPIC FROM VOTES vo WHERE vo.USERID = <%= session.getAttribute("userid") %>)
             </sql:query>
-            <table border = "1" width = "100%">
+            <table>
                 <tr>
                    <th>Cím</th>
                    <th>A kérdés részletes leírása</th>
@@ -81,8 +82,9 @@
                    </tr>
                 </c:forEach>
             </table>
+            </div>
             <hr>
-            <br><a href="user_main.jsp">Vissza a kezdőlapra!</a><br>
+            <br><label><b><a href="user_main.jsp">Vissza a kezdőlapra!</a></b></label><br>
             <form action="check.jsp" method="POST" name="logout">
                 <br><hr><br>
             <input type="submit" name="logout" value="Kijelentkezés" id="log">
