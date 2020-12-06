@@ -29,13 +29,15 @@
     <body>
         <h1>Üdvözöljük!</h1>
         <h2>Kérjük jelentkezzen be!</h2>
+        <div class="login">
         <form action="check.jsp" method="POST">
-            Felhasználó név: <input type="text" name="username" value="" /><br>
-            Jelszó: <input type="password" name="password" value="" /><br>
-            <input type="submit" value="Bejelentkezés" name="login" /><br><br>
-            Nincs még fiókja? <a href="register.jsp">Regisztráljon!</a><br>
-            Adminisztrátori bejelentkezéshez kattintson <a href="adminlogin.jsp">ide</a>.<br>
+            <label> <b> Felhasználó név:</b></label><br> <input type="text" name="username" value="" id="user"placeholder="Felhasználó név"/><br><br>
+            <label> <b> Jelszó:</b></label><br> <input type="password" name="password" value="" id="pass" placeholder="Jelszó"/><br><br>
+            <input type="submit" value="Bejelentkezés" name="login" id="log"/><br><br>
+            <label>Nincs még fiókja? <a href="register.jsp">Regisztráljon!</a></label><br>
+            <label>Adminisztrátori bejelentkezéshez kattintson <a href="adminlogin.jsp">ide</a>.</label><br>
         </form>
+        </div>
         <c:if test="${!empty param.errorMsg}">
             <hr>
             ${param.errorMsg}
