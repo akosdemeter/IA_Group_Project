@@ -17,8 +17,6 @@
         </head>
         <body>
             <h1>Kezdőlap (admin)</h1>
-            Felhasználó: <%= session.getAttribute("adminid") %><br>
-            Fiók típusa: <%= session.getAttribute("usertype") %><br>
             <sql:query var="szavazasjovahagyas" dataSource="${intalk}">
                 SELECT t.ID,t.TITLE,t.QUESTION,t.ANSWER1,t.ANSWER2,t.ANSWER3,t.ANSWER4 FROM TOPICS t WHERE t.ADMIN is NULL
             </sql:query>

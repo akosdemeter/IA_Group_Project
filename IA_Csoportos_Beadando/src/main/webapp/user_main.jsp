@@ -16,8 +16,6 @@
         </head>
         <body>
             <h1>Kezdőlap (user)</h1>
-            Felhasználó: <%= session.getAttribute("userid") %><br>
-            Fiók típusa: <%= session.getAttribute("usertype") %><br>
             
             <br><a href="user_myvote.jsp">Saját szavazások</a><br>
             <br><a href="user_othervote.jsp">Mások szavazásai</a><br>
