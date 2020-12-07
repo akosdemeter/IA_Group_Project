@@ -25,19 +25,26 @@
             </sql:query>
             <c:forEach var = "row8" items = "${lekerdezes8.rows}">
                 <form action="check2.jsp" method="POST" name="${row8.ID}+form">
-                <h3><c:out value = "${row8.title}"/></h3>
+                    <h3><c:out value = "${row8.title}"/></h3><br>
                 <c:out value = "${row8.question}"/><br>
                 <c:if test="${!empty row8.answer1}">
+                    <label class="container">
                     <input type="radio" name="${row8.ID}" value="1" /><c:out value = "${row8.answer1}"/>
+                    <span class
+                    </label>
+                    <br>
                 </c:if>
                 <c:if test="${!empty row8.answer2}">
                 <input type="radio" name="${row8.ID}" value="2" /><c:out value = "${row8.answer2}"/>
+                <br>
                 </c:if>
                 <c:if test="${!empty row8.answer3}">
                 <input type="radio" name="${row8.ID}" value="3" /><c:out value = "${row8.answer3}"/>
+                <br>
                 </c:if>
                 <c:if test="${!empty row8.answer4}">
                 <input type="radio" name="${row8.ID}" value="4" /><c:out value = "${row8.answer4}"/>
+                <br>
                 </c:if>
                 <input type="hidden" name="topicid" value="${row8.ID}" />
                 <br><input type="submit" value="Szavazás" name="sendvote" />
